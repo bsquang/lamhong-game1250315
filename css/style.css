@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: RobotoCondensed;
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 300;
 }
 .wrapper{
@@ -15,9 +15,45 @@
 }
 .page{
   display: none;
+  width: 100%;
+  height: 100%;
 }
+.btnNext {
+  border: 3px solid white;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 8px;
+  position: absolute;
+  padding: 4px 30px;
+  background: #ED1D24;
+  color: #FFF;
+}
+.page.splash{
+  background: transparent url(/img/bg.splash.png);
+}
+.splash .btnNext {  
+  bottom: 20px;
+  right: 20px; 
+}
+
+.page.info01{
+  background: transparent url(/img/bg.info01.png);
+}
+.info01 .btnNext {
+  bottom: 20px;
+  right: 20px;
+}
+
+.page.info02{
+  background: transparent url(/img/bg.info02.png);
+}
+.info02 .btnNext {
+  bottom: 20px;
+  right: 20px; 
+}
+
 .page.home{
-  background: transparent url(/img/bg.page1.png);
+  background: transparent url(/img/bg.home.png);
 }
 .home{
   width: 100%;

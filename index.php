@@ -11,6 +11,15 @@
 <body>
   
   <div class="wrapper">
+    <div class="page splash" state-id="0">
+      <div class="btnNext">CHƠI LẠI</div>
+    </div>
+    <div class="page info01" state-id="0">
+      <div class="btnNext">TIẾP THEO</div>
+    </div>
+    <div class="page info02" state-id="0">
+      <div class="btnNext">TIẾP THEO</div>
+    </div>
     <div class="home page" state-id="1">
       <div class="left">
         <div class="btnStart"></div><!-- START -->
@@ -23,7 +32,7 @@
         </div>
         
       </div>
-    </div>
+    </div>    
     <div class="play page" state-id="2">
       <div class="top">
         <h1 id="title"></h1>
@@ -136,34 +145,11 @@
   $( document ).ready(function(){
       FastClick.attach(document.body);
       //readyGame();
-      changeState("home");
+      changeState("splash");
       console.log(countBtn);
-      eventListener();
-      autoScale();
+      eventListener();      
     });
-  function autoScale(){
-    var defaultWidth = 1024;
-    var defaultHeight = 768;
-    var thisWidth = screen.width;
-    var thisHeight =screen.height;
-    console.log(thisWidth +" / "+ defaultWidth);
-    console.log(thisHeight +" / "+ defaultHeight);
-    var x = 1;
-    var y = 1;
-   
-    scalePage(thisWidth / defaultWidth,thisHeight/defaultHeight);
-  }
-  function scalePage(x,y) {
-    console.log(x+","+y);
-    $('.wrapper').css({
-      '-webkit-transform' : 'scale(' + x + "," + y + ')',
-      '-moz-transform'    : 'scale(' + x + "," + y + ')',
-      '-ms-transform'     : 'scale(' + x + "," + y + ')',
-      '-o-transform'      : 'scale(' + x + "," + y + ')',
-      'transform'         : 'scale(' + x + "," + y + ')'
-    });
-
-  }
+  
   function eventListener(){
     $(".btn-game").bind('click', function(event) 
       {
@@ -205,7 +191,16 @@
           //console.log(event);
           
       });
-    
+    $(".splash div.btnNext").bind('click', function(event){
+      changeState("info01");
+    });
+    $(".info01 div.btnNext").bind('click', function(event){
+      changeState("info02");
+    });
+    $(".info02 div.btnNext").bind('click', function(event){
+      changeState("home");
+    });
+
     $(".btnStart").bind('click', function(event){
         changeState("play");
       });
@@ -229,24 +224,25 @@
   }
   function changeState(state){
     $(".page").hide();
-    switch (state) {
-          case "home":
-            $("."+state).show();
-            break;
-          case "play":
-            readyGame();
-            $("."+state).show();
-            break;
-          case "finish":
-            $("."+state).show();
-            break;
-          case "end":
-            $("."+state).show();
-            break;
-          case "help":
-            $("."+state).show();
-            break;
-        }
+    $(".page."+state).show();
+    // switch (state) {
+    //       case "home":
+    //         $("."+state).show();
+    //         break;
+    //       case "play":
+    //         readyGame();
+    //         $("."+state).show();
+    //         break;
+    //       case "finish":
+    //         $("."+state).show();
+    //         break;
+    //       case "end":
+    //         $("."+state).show();
+    //         break;
+    //       case "help":
+    //         $("."+state).show();
+    //         break;
+    //     }
         
   }
   
