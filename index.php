@@ -13,21 +13,13 @@
   <div class="wrapper">
     <div class="home page" state-id="1">
       <div class="left">
-        <div class="btnStart">
-          START
-        </div>
+        <div class="btnStart"></div><!-- START -->
       </div>
       <div class="right">
         <div class="menu">
-          <div class="btnMenu" btn-id="help">
-            HƯỚNG DẪN
-          </div>
-          <div class="btnMenu" btn-id="rate">
-            XẾP HẠNG
-          </div>
-          <div class="btnMenu" btn-id="info">
-            THÔNG TIN
-          </div>
+          <div class="btnMenu" btn-id="help"></div><!-- HƯỚNG DẪN -->
+          <div class="btnMenu" btn-id="rate"></div><!-- XẾP HẠNG -->
+          <div class="btnMenu" btn-id="info"></div><!-- THÔNG TIN -->
         </div>
         
       </div>

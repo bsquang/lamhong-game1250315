@@ -8,16 +8,16 @@
 .wrapper{
   width: 1024px;
   height: 768px;
-  background-color: #EDA263;
+  background-color: transparent;
   float: left;
   transform-origin: top left 0;
   position: relative;
-  /*-ms-transform: scale(1,1);*/ /* IE 9 */
-  /*-webkit-transform: scale(1,1);*/ /* Chrome, Safari, Opera */
-  /* transform: scale(1,1);*/
 }
 .page{
   display: none;
+}
+.page.home{
+  background: transparent url(/img/bg.page1.png);
 }
 .home{
   width: 100%;
@@ -34,9 +34,10 @@
   float: right;
 }
 .home .btnMenu{
-  font-size: 40px;
-  border: 1px solid #000000;
-  margin-bottom: 10px;
+  border: none;
+  width: 375px;
+  height: 90px;
+  margin-bottom: 14px;
 }
 .home .menu{
   position: absolute;
@@ -46,8 +47,10 @@
 .home .btnStart{
   position: absolute;
   bottom: 200px;
-  left: 200px;
-  font-size: 52px;
+  left: 90px;
+  width: 340px;
+  height: 100px;
+  border: none;  
 }
 .play{
   display: table;
