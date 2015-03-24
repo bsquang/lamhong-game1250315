@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: RobotoCondensed;
+  font-weight: 300;
+}
+.wrapper{
+  width: 1024px;
+  height: 768px;
+  background-color: #EDA263;
+  float: left;
+  transform-origin: top left 0;
+  position: relative;
+  /*-ms-transform: scale(1,1);*/ /* IE 9 */
+  /*-webkit-transform: scale(1,1);*/ /* Chrome, Safari, Opera */
+  /* transform: scale(1,1);*/
+}
+.page{
+  display: none;
+}
+.home{
+  width: 100%;
+  height: 100%;
+}
+.home .left{
+  height: 100%;
+  width: 50%;
+  float: left;
+}
+.home .right{
+  height: 100%;
+  width: 50%;
+  float: right;
+}
+.home .btnMenu{
+  font-size: 40px;
+  border: 1px solid #000000;
+  margin-bottom: 10px;
+}
+.home .menu{
+  position: absolute;
+  top: 300px;
+  right: 100px;
+}
+.home .btnStart{
+  position: absolute;
+  bottom: 200px;
+  left: 200px;
+  font-size: 52px;
+}
+.play{
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.top{
+  width: 100%;
+  height: 40%;
+}
+.game{
+  width: 860px;
+  height: 500px;
+  /*position: absolute;
+  top: 150px;
+  left: 0px;*/
+  display: table;
+  margin: 0 auto;
+  background-color: #EDA263;
+}
+.game ul{
+  list-style: none;
+}
+.game li{
+  float: left;
+  margin: 1px;
+}
+.finish{
+  width: 100%;
+  height: 100%;
+}
+.finish .menu{
+  position: absolute;
+  bottom: 150px;
+  font-size: 24px;
+  left: 480px;
+  width: 300px;
+}
+.finish .btnRePlay{
+  float: left;
+}
+.finish .btnExit{
+  float: right;
+}
+.bigBtn{
+  width: 275px /*27.8%*/;
+}
+.middleBtn{
+  width: 221px /*22.96%*/;
+}
+.smallBtn{
+  width: 185px /*17.65%*/;
+}
+.verysmallBtn{
+  width: 149px /*14.21%*/;
+}
+.btn-game{
+  
+  height: 80px;
+  background-color: #E08441;
+  border: 0.5px solid #EDA263;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  color: #E08441;
+}
+.btn-game img{
+  width: 80px;
+  display: none;
+}
+.btn-touched{
+  background-color: #DF6049;
+  color: #FFFFFF;
+  
+}
+.btn-touched img{
+  display:inline;
+}
