@@ -73,7 +73,7 @@ function eventListener() {
                         btnSelected2.css('color', '#FFF');
                         btnSelected = null;
                         btnSelected2 = null;
-                        console.log(mScore);
+                        
                         $("#score").text(checkScore(mScore));
                         countBtn -= 2;
                         if (countBtn == 0) {
@@ -288,7 +288,7 @@ function stopGame() {
     isStart = false;
     isClockRun = false;
     
-    if (countBtn > 0) {
+    if (countBtn <= 0) {
       
       if (mScore >= 200) {
         alert("You win!");
