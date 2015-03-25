@@ -1,27 +1,27 @@
 var listWord = [{
     "word": "Giúp ăn ngon",
-    "score": "10"
+    "score": "50"
 }, {
     "word": "Phostpho",
-    "score": "20"
+    "score": "50"
 }, {
     "word": "Canxi",
-    "score": "30"
+    "score": "50"
 }, {
     "word": "Magie",
-    "score": "40"
+    "score": "50"
 }, {
     "word": "Giúp ngủ ngon",
     "score": "50"
 }, {
     "word": "Giảm suy nhược",
-    "score": "60"
+    "score": "50"
 }, {
     "word": "Giảm mệt mỏi",
-    "score": "70"
+    "score": "50"
 }, {
     "word": "<img src=\"img/thuoc.png\"/>",
-    "score": "80"
+    "score": "50"
 }];
 
 var arrayBtnID = [1, 2, 3, 4, 4, 5, 6, 7, 8, 2, 1, 8, 7, 6, 5, 3];
@@ -66,7 +66,9 @@ function eventListener() {
                 btnSelected2 = $(this);
                 if (btnSelected.attr("data-id") == btnSelected2.attr("data-id")) {
                     setTimeout(function() {
-                        mScore += parseInt(btnSelected.attr("data-score"));
+                        
+                        mScore += 50;
+                        
                         btnSelected.css('color', '#FFF');
                         btnSelected2.css('color', '#FFF');
                         btnSelected = null;
@@ -81,8 +83,9 @@ function eventListener() {
                     }, 200);
 
                 } else {
-                    mScore += wrongScore;
-                    mScore = mScore <= 0 ? 0 : mScore;
+                  
+                    mScore -= 20;                    
+                    
                     $("#score").text(checkScore(mScore));
                     setTimeout(function() {
                         btnSelected.removeClass("btn-touched");
@@ -284,14 +287,26 @@ function startGame() {
 function stopGame() {
     isStart = false;
     isClockRun = false;
+    
     if (countBtn > 0) {
-        setTitle("lose");
-    } else {
+      
+      if (mScore >= 200) {
+        alert("You win!");
         setTitle("win");
+      }else if(mScore < 200){
+        setTitle("lose");
+        alert("You lose!");
+      }
+      
+    } else {
+        setTitle("lose");
+        alert("You lose ! Time out !");
     }
     
-    resetGame();
-    changeState("splash");
+    restartApp();
+    
+    //resetGame();
+    //changeState("splash");
 }
 
 function resetGame() {
