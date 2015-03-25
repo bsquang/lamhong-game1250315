@@ -99,6 +99,20 @@ body, html, input, textarea{
   bottom: 20px;
   right: 20px; 
 }
+.page.win{
+  background: transparent url('../img/win.png');
+}
+.win .btnNext {
+  bottom: 20px;
+  right: 20px; 
+}
+.page.lose{
+ background: transparent url('../img/lose.png');
+}
+.lose .btnNext {
+  bottom: 20px;
+  right: 20px; 
+}
 .page.save{
  /* background: transparent url('../img/bg.home.png');*/
 }

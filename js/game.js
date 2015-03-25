@@ -113,6 +113,16 @@ function eventListener() {
     $(".info02 div.btnNext").bind('click', function(event) {
         changeState("home");
     });
+    $(".win div.btnNext").bind('click', function(event) {
+       
+        changeState("save");
+        //restartApp();
+    });
+    $(".lose div.btnNext").bind('click', function(event) {
+       
+        changeState("save");
+        //restartApp();
+    });
     $(".save div.btnNext").bind('click', function(event) {
         saveScore();
         changeState("splash");
@@ -284,16 +294,19 @@ function getScore(){
 function saveScore(){
     var name = $("#txtName").val();
     var score = mScore;
-    var listSaveScore = localStorage.getItem("GameScore");
-    if (listSaveScore) {
-        listSaveScore = JSON.parse(listSaveScore);
-        listSaveScore.push({"name":name,"score":score});
-    }else{
-        listSaveScore = [];
-        listSaveScore.push({"name":name,"score":score});
+    if (name != "") {
+        var listSaveScore = localStorage.getItem("GameScore");
+        if (listSaveScore) {
+            listSaveScore = JSON.parse(listSaveScore);
+            listSaveScore.push({"name":name,"score":score});
+        }else{
+            listSaveScore = [];
+            listSaveScore.push({"name":name,"score":score});
+        }
+        localStorage.setItem("GameScore",  JSON.stringify(listSaveScore));
+        console.log( localStorage.getItem("GameScore"));
     }
-    localStorage.setItem("GameScore",  JSON.stringify(listSaveScore));
-    console.log( localStorage.getItem("GameScore"));
+    
 }
 function rateScore(listScore){
     if (listScore != null) {
@@ -373,7 +386,7 @@ function stopGame() {
         loseGame();
         //alert("You lose ! Time out !");
     }
-    changeState("save");
+    //changeState("result");
    // restartApp();
     
     //resetGame();
@@ -381,11 +394,11 @@ function stopGame() {
 }
 function winGame(){
     setTitle("win");
-    $("#titleSave").text("Chúc mừng bạn đã chiến thắng với số điểm "+mScore);
+    changeState("win");
 }
 function loseGame(){
     setTitle("lose");
-    $("#titleSave").text("Rất tiếc ! Bạn đã thua với số điểm "+mScore);
+    changeState("lose");
 }
 function resetGame() {
     setTitle("newgame");
