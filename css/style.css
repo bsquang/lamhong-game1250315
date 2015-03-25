@@ -60,6 +60,7 @@ body, html, input, textarea{
   padding: 4px 30px;
   background: #ED1D24;
   color: #FFF;
+  cursor: pointer;
 }
 
 .btnNext:active{
@@ -69,7 +70,12 @@ body, html, input, textarea{
   -webkit-transform: scale3d(0.8, 0.8, 0.8);
   transform: scale3d(0.8, 0.8, 0.8);
 }
-
+.btnMenu{
+  cursor: pointer;
+}
+.btnStart{
+  cursor: pointer;
+}
 .page.splash{
   background: transparent url('../img/bg.splash.png');
 }
@@ -93,7 +99,20 @@ body, html, input, textarea{
   bottom: 20px;
   right: 20px; 
 }
-
+.page.save{
+ /* background: transparent url('../img/bg.home.png');*/
+}
+.save .btnNext{
+  bottom: 20px;
+  right: 20px; 
+}
+.page.rate{
+ /* background: transparent url('../img/bg.home.png');*/
+}
+.rate .btnNext{
+  bottom: 20px;
+  right: 20px; 
+}
 .page.home{
   background: transparent url('../img/bg.home.png');
 }
@@ -202,6 +221,7 @@ body, html, input, textarea{
 }
 
 .btn-game{
+  cursor: pointer;
   float: left;
   height: 50px;
   line-height: 50px;

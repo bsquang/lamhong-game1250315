@@ -68,9 +68,10 @@ function eventListener() {
                     setTimeout(function() {
                         
                         mScore += 50;
-                        
-                        btnSelected.css('color', '#FFF');
-                        btnSelected2.css('color', '#FFF');
+                        btnSelected.addClass('color', '#FFF');
+                        btnSelected2.addClass('color', '#FFF');
+                        //btnSelected.css('color', '#FFF');
+                        //btnSelected2.css('color', '#FFF');
                         btnSelected = null;
                         btnSelected2 = null;
                         
@@ -112,7 +113,14 @@ function eventListener() {
     $(".info02 div.btnNext").bind('click', function(event) {
         changeState("home");
     });
-
+    $(".save div.btnNext").bind('click', function(event) {
+        saveScore();
+        changeState("splash");
+        //restartApp();
+    });
+    $(".rate div.btnNext").bind('click', function(event) {
+        changeState("home");
+    });
     $(".btnStart").bind('click', function(event) {
         changeState("play");
         readyGame();
@@ -123,10 +131,24 @@ function eventListener() {
             case "help":
                 break;
             case "rate":
+                var listScore = getScore();
+               
+                listScore = rateScore(listScore);
+               
+                for(var i = 0 ; i < listScore.length;i++){
+                    if (i<10) {
+                       $("#divRate").append("<p>"+listScore[i]["name"]+" - "+listScore[i]["score"]+"</p>");
+                    }else{
+                        break;
+                    }
+                    
+                }
+                changeState("rate");
                 break;
             case "info":
                 changeState("info01");
                 break;
+            
         }
     });
     $(".btnRePlay").bind('click', function(event) {
@@ -176,18 +198,23 @@ function countdown(t, callback) { // t la tong so giay, tinh ra so phut va so gi
 }
 
 function checkScore(s) {
-    if (s < 10) {
-        s = "000" + s;
-    }
-    if (s < 100) {
-        s = "00" + s;
-    }
-    if (s < 1000) {
-        s = "0" + s;
-    }
-    if (s <= 0) {
+    console.log(s);
+    if (s == 0) {
         s = "0000";
     }
+    else if (s < 0) {
+        s = "-" + checkScore(Math.abs(s));
+    }
+    else if (s < 10 ) {
+        s = "000" + s;
+    }
+    else if (s < 100 ) {
+        s = "00" + s;
+    }
+    else if (s < 1000) {
+        s = "0" + s;
+    }
+    
     return s;
 }
 
@@ -244,10 +271,52 @@ function shuffle(array) {
 
     return array;
 }
-
+function getScore(){
+    //localStorage.setItem("GameScore","");
+    var listScore = localStorage.getItem("GameScore");
+    console.log(listScore);
+    if (listScore) {
+        return JSON.parse(listScore);
+    }else{
+        return [];
+    }
+}
+function saveScore(){
+    var name = $("#txtName").val();
+    var score = mScore;
+    var listSaveScore = localStorage.getItem("GameScore");
+    if (listSaveScore) {
+        listSaveScore = JSON.parse(listSaveScore);
+        listSaveScore.push({"name":name,"score":score});
+    }else{
+        listSaveScore = [];
+        listSaveScore.push({"name":name,"score":score});
+    }
+    localStorage.setItem("GameScore",  JSON.stringify(listSaveScore));
+    console.log( localStorage.getItem("GameScore"));
+}
+function rateScore(listScore){
+    if (listScore != null) {
+        
+        for(var i = 0; i<listScore.length-1;i++){
+            for(var j = i+1;j<listScore.length ;j++){
+                if (listScore[j]["score"] > listScore[i]["score"]) {
+                    
+                    var temp = listScore[i];
+                    listScore[i] = listScore[j];
+                    listScore[j] = temp;
+                }
+            }
+        }
+        
+        return listScore;
+    }
+    return [];
+}
 function initGame() {
     mScore = 0;
     $("#score").text("0000");
+    $("#txtName").val("");
     randomWord();
     $(".btn-game").css("opacity", "1.0");
 }
@@ -291,24 +360,33 @@ function stopGame() {
     if (countBtn <= 0) {
       
       if (mScore >= 200) {
-        alert("You win!");
-        setTitle("win");
+       // alert("You win!");
+       winGame();
+        
       }else if(mScore < 200){
-        setTitle("lose");
-        alert("You lose!");
+        loseGame();
+        
+      //  alert("You lose!");
       }
       
     } else {
-        setTitle("lose");
-        alert("You lose ! Time out !");
+        loseGame();
+        //alert("You lose ! Time out !");
     }
-    
-    restartApp();
+    changeState("save");
+   // restartApp();
     
     //resetGame();
     //changeState("splash");
 }
-
+function winGame(){
+    setTitle("win");
+    $("#titleSave").text("Chúc mừng bạn đã chiến thắng với số điểm "+mScore);
+}
+function loseGame(){
+    setTitle("lose");
+    $("#titleSave").text("Rất tiếc ! Bạn đã thua với số điểm "+mScore);
+}
 function resetGame() {
     setTitle("newgame");
     countBtn = $(".game").find(".btn-game").length;
