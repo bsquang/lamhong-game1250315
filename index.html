@@ -41,61 +41,39 @@
       </div>
       <div class="game">
         
-        <ul>
-<!--          -->
-          <li>
-            <div class="btn-game middleBtn" data-id="1" >Giúp ăn ngon</div>
-          </li>
-          <li>
-            <div class="btn-game middleBtn" data-id="2">Phostpho</div>
-          </li>
-          <li>
-            <div class="btn-game smallBtn" data-id="3">Canxi</div>
-          </li>
-          <li>
-            <div class="btn-game middleBtn" data-id="4">Magie</div>
-          </li>
-<!--          -->
-          <li>
-            <div class="btn-game verysmallBtn" data-id="4">Magie</div>
-          </li>
-          <li>
+        <div class="board">
+          <div class="board-row">
+              <div class="btn-game bigBtn" data-id="1" >Giúp ăn ngon</div>
+              <div class="btn-game bigBtn" data-id="2">Phostpho</div>
+              <div class="clearfix"></div>
+          </div>
+          <div class="board-row">
+              <div class="btn-game middleBtn" data-id="3">Canxi</div>
+              <div class="btn-game bigBtn" data-id="4">Magie</div>
+              <div class="btn-game bigBtn" data-id="4">Magie</div>
+              <div class="clearfix"></div>
+          </div>
+          <div class="board-row">
               <div class="btn-game bigBtn" data-id="5">Giúp ngủ ngon</div>
-            </li>
-          <li>
               <div class="btn-game bigBtn" data-id="6">Giảm suy nhược</div>
-            </li>
-          <li>
-              <div class="btn-game verysmallBtn" data-id="7"><img src="img/thuoc.png"/></div>
-            </li>
-<!--          -->
-          <li>
+              <div class="btn-game bigBtn" data-id="7"><img src="img/thuoc.png"/></div>
+              <div class="clearfix"></div>
+          </div>
+          <div class="board-row">
               <div class="btn-game middleBtn" data-id="8">Giảm mệt mỏi</div>
-            </li>
-          <li>
-              <div class="btn-game smallBtn" data-id="2">Phostpho</div>
-            </li>
-          <li>
-              <div class="btn-game middleBtn" data-id="1">Giúp ăn ngon</div>
-            </li>
-            <li>
-              <div class="btn-game middleBtn" data-id="8">Giảm mệt mỏi</div>
-            </li>
-<!--            -->
-            <li>
-              <div class="btn-game verysmallBtn" data-id="7"><img src="img/thuoc.png"/></div>
-            </li>
-            <li>
+              <div class="btn-game bigBtn" data-id="2">Phostpho</div>
+              <div class="btn-game bigBtn" data-id="1">Giúp ăn ngon</div>
+              <div class="btn-game bigBtn" data-id="8">Giảm mệt mỏi</div>
+              <div class="clearfix"></div>
+          </div>
+          <div class="board-row">
+              <div class="btn-game bigBtn" data-id="7"><img src="img/thuoc.png"/></div>
               <div class="btn-game bigBtn" data-id="6">Giảm suy nhược</div>
-            </li>
-            <li>
               <div class="btn-game bigBtn" data-id="5">Giúp ngủ ngon</div>
-            </li>
-            <li>
-              <div class="btn-game verysmallBtn" data-id="3">Canxi</div>
-            </li>
-           
-        </ul>
+              <div class="btn-game bigBtn" data-id="3">Canxi</div>
+              <div class="clearfix"></div>
+          </div>
+        </div>
         
         
       </div>
@@ -128,13 +106,13 @@
                     "game":"2",
                     "finish":"3",
                     "end":"4"};
-  var listTile = {"newgame":"Game Tìm Ô Giống Nhau",
+  var listTile = {"newgame":"",
                   "ready":"Chuẩn Bị",
-                  "start":"Bắt Đầu",
+                  "start":"Bắt Đầu Chơi",
                   "win":"Chúc Mừng Bạn Đã Chiến Thắng",
                   "lose":"Bạn Đã Thua"};
-  var waitTime = 11; //10 giay cho truoc khi choi
-  var playTime = 61; //1 phut choi game
+  var waitTime = 3; //10 giay cho truoc khi choi
+  var playTime = 600; //1 phut choi game
   var btnSelected = null;
   var btnSelected2 = null;
   // var isSelected = false;
@@ -142,9 +120,9 @@
   var isClockRun = false;
   var countBtn = 0;
   var mScore = 0;
+  var wrongScore = -5;
   $( document ).ready(function(){
-      FastClick.attach(document.body);
-      //readyGame();
+      FastClick.attach(document.body);    
       changeState("splash");
       console.log(countBtn);
       eventListener();      
@@ -161,8 +139,8 @@
               if (btnSelected.attr("data-id") == btnSelected2.attr("data-id")) {
                 setTimeout(function(){
                     mScore += parseInt(btnSelected.attr("data-score"));
-                    btnSelected.css('opacity','0.0');
-                    btnSelected2.css('opacity','0.0');
+                    btnSelected.css('color','#FFF');
+                    btnSelected2.css('color','#FFF');
                     btnSelected = null;
                     btnSelected2 = null;
                     console.log(mScore);
@@ -175,6 +153,9 @@
                   },200);
                 
               }else{
+                mScore += wrongScore;
+                mScore = mScore <= 0 ? 0 : mScore;
+                $("#score").text(checkScore(mScore));
                 setTimeout(function(){
                     btnSelected.removeClass("btn-touched");
                     
@@ -203,6 +184,7 @@
 
     $(".btnStart").bind('click', function(event){
         changeState("play");
+        readyGame();
       });
     $(".btnMenu").bind('click', function(event){
         var btnId = $(this).attr("btn-id");
@@ -212,6 +194,7 @@
           case "rate":
             break;
           case "info":
+            changeState("info01");
             break;
         }
       });
@@ -224,26 +207,7 @@
   }
   function changeState(state){
     $(".page").hide();
-    $(".page."+state).show();
-    // switch (state) {
-    //       case "home":
-    //         $("."+state).show();
-    //         break;
-    //       case "play":
-    //         readyGame();
-    //         $("."+state).show();
-    //         break;
-    //       case "finish":
-    //         $("."+state).show();
-    //         break;
-    //       case "end":
-    //         $("."+state).show();
-    //         break;
-    //       case "help":
-    //         $("."+state).show();
-    //         break;
-    //     }
-        
+    $(".page."+state).show();     
   }
   
   //Count down function
@@ -286,9 +250,13 @@
     if (s < 1000) {
       s = "0"+s;
     }
+    if (s <=0 ) {
+      s = "0000";
+    }
     return s;
   }
   function checkTime(i) {
+    i = Math.floor(i);
     if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
   }
@@ -362,7 +330,7 @@
   }
   function startGame(){
     setTitle("start");
-    countBtn = $(".game").find("li").length;
+    countBtn = $(".game").find(".btn-game").length;
     
     $(".btn-game").removeClass("btn-touched");
     isStart = true;
@@ -380,12 +348,12 @@
     }
     setTimeout(function(){
       resetGame();
-      changeState("finish")
+      changeState("splash");
     },3000);
   }
   function resetGame(){
     setTitle("newgame");
-    countBtn = $(".game").find("li").length;
+    countBtn = $(".game").find(".btn-game").length;
     $(".btn-game").css("opacity","0.0");
     $(".btn-game").removeClass("btn-touched");
     //setTimeout(function(){readyGame();},5000);
