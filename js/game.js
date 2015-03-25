@@ -115,13 +115,13 @@ function eventListener() {
     });
     $(".win div.btnNext").bind('click', function(event) {
        
-        changeState("save");
-        //restartApp();
+        //changeState("save");
+        restartApp();
     });
     $(".lose div.btnNext").bind('click', function(event) {
        
-        changeState("save");
-        //restartApp();
+        //changeState("save");
+        restartApp();
     });
     $(".save div.btnNext").bind('click', function(event) {
         saveScore();
@@ -129,7 +129,7 @@ function eventListener() {
         //restartApp();
     });
     $(".rate div.btnNext").bind('click', function(event) {
-        changeState("home");
+        //changeState("home");
     });
     $(".btnStart").bind('click', function(event) {
         changeState("play");
@@ -141,19 +141,19 @@ function eventListener() {
             case "help":
                 break;
             case "rate":
-                var listScore = getScore();
-               
-                listScore = rateScore(listScore);
-               
-                for(var i = 0 ; i < listScore.length;i++){
-                    if (i<10) {
-                       $("#divRate").append("<p>"+listScore[i]["name"]+" - "+listScore[i]["score"]+"</p>");
-                    }else{
-                        break;
-                    }
-                    
-                }
-                changeState("rate");
+                //var listScore = getScore();
+                //
+                //listScore = rateScore(listScore);
+                //
+                //for(var i = 0 ; i < listScore.length;i++){
+                //    if (i<10) {
+                //       $("#divRate").append("<p>"+listScore[i]["name"]+" - "+listScore[i]["score"]+"</p>");
+                //    }else{
+                //        break;
+                //    }
+                //    
+                //}
+                //changeState("rate");
                 break;
             case "info":
                 changeState("info01");
@@ -208,12 +208,12 @@ function countdown(t, callback) { // t la tong so giay, tinh ra so phut va so gi
 }
 
 function checkScore(s) {
-    console.log(s);
+    
     if (s == 0) {
         s = "0000";
     }
     else if (s < 0) {
-        s = "-" + checkScore(Math.abs(s));
+        s = "" + s;
     }
     else if (s < 10 ) {
         s = "000" + s;
