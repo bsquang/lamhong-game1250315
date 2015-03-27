@@ -394,11 +394,19 @@ function stopGame() {
 }
 function winGame(){
     setTitle("win");
-    changeState("win");
+    
+    setTimeout(function(){
+      changeState("win");
+    },3000);
+    
 }
 function loseGame(){
     setTitle("lose");
-    changeState("lose");
+    
+    setTimeout(function(){
+      changeState("lose");
+    },3000);
+    
 }
 function resetGame() {
     setTitle("newgame");
