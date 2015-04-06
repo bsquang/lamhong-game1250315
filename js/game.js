@@ -105,7 +105,14 @@ function eventListener() {
 
     });
     $(".splash div.btnNext").bind('click', function(event) {
-        changeState("info01");
+        
+        if(localStorage.infoEnable == '0'){
+            changeState("home");
+        }else if(localStorage.infoEnable == '1'){
+            changeState("info01");
+        }
+        
+        
     });
     $(".info01 div.btnNext").bind('click', function(event) {
         changeState("info02");
@@ -418,4 +425,30 @@ function resetGame() {
 
 function restartApp() {
   window.location.href = '';
+}
+
+
+initSaveConfig();
+function initSaveConfig(){
+  if (localStorage.infoEnable == undefined) {
+    
+    localStorage.setItem('infoEnable','0')
+    
+  }
+  
+  if(localStorage.infoEnable == '0'){
+    
+  }else if(localStorage.infoEnable == '1'){
+    
+  }
+  
+}
+function toggleInfo() {
+    if(localStorage.infoEnable == '0'){
+        localStorage.setItem('infoEnable','1');
+    }else if(localStorage.infoEnable == '1'){
+        localStorage.setItem('infoEnable','0');
+    }
+    
+    restartApp();
 }
